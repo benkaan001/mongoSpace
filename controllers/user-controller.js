@@ -13,7 +13,9 @@ const userController = {
       });
   },
   // get a single user
+  // instead of accessing entire req, destructured params out of it.
   getUserById({ params }, res) {
+    // User.findOne(params.id) is another way to write it
     User.findOne({ _id: params.id })
       .then((userData) => {
         if (!userData) {
@@ -28,9 +30,38 @@ const userController = {
       });
   },
   // create a user
+  // again destructure the body part out of the Express.js req object
   createUser({ body }, res) {
     User.create(body)
       .then((userData) => res.status(200).json(userData))
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // update a user by id
+  updateUser({ params, body }, res) {
+    // if we don't set the third new:true parameter, it will retun the original doc
+    //not the updated one -->updateOne() and updateMany() update without returning
+    User.findOneAndUpdate({ _id: params.id }, body, { new: true })
+      .then((userData) => {
+        if (!userData) {
+          res.status(404).json({ message: "No user found with this ID!" });
+          return;
+        }
+        res.status(200).json(userData);
+      })
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // delete a user
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.id })
+      .then((userData) => {
+        if (!userData) {
+          res.status(404).json({ message: "No user found with this ID!" });
+          return;
+        }
+        res.status(200).json(userData);
+      })
       .catch((err) => res.status(500).json(err));
   },
 };
