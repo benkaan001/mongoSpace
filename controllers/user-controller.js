@@ -3,7 +3,7 @@ const { User } = require("../models");
 const userController = {
   // get all users
   getAllUsers(req, res) {
-    User.find([])
+    User.find({})
       .then((userData) => {
         res.status(200).json(userData);
       })
