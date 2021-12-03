@@ -1,27 +1,34 @@
 const { Schema, model, Types } = require("mongoose");
 const dateFormatter = require(".././utils/dateFormatter");
 
-const ReactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
+const ReactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAtVal) => dateFormatter(createdAtVal),
+    },
   },
-  reactionBody: {
-    type: String,
-    required: true,
-    min: 1,
-    max: 280,
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (createdAtVal) => dateFormatter(createdAtVal),
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
+);
 
 const ThoughtSchema = new Schema(
   {
@@ -41,15 +48,22 @@ const ThoughtSchema = new Schema(
       required: true,
     },
     // use ReactionSchema to validate data for a reaction
+
+    // unlike the relationship between thoughts and users, reactions will be nested directly
+    // in a thought's document and not referred to.
     reactions: [ReactionSchema],
   },
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
   }
 );
 
 const Thought = model("Thought", ThoughtSchema);
 
+ThoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 module.exports = Thought;
