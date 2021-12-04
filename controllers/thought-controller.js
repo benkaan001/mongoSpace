@@ -21,7 +21,7 @@ const thoughtController = {
 
   // get a thought by id
   getThoughtById({ params }, res) {
-    Thought.findOne({ _id: params.id })
+    Thought.findOne({ _id: params.thoughtId })
       .populate({
         path: "reactions",
         select: "-__v",
@@ -29,7 +29,7 @@ const thoughtController = {
       .select("-__v")
       // no need for sorting because we'd be only sorting one user.
       // .sort({ _id: -1 })
-      .then((userData) => {
+      .then((thoughtData) => {
         if (!thoughtData) {
           res.status(404).json({ message: "No thought found with this ID!" });
           return;
@@ -66,7 +66,7 @@ const thoughtController = {
   },
   // update a thought
   updateThought({ params, body }, res) {
-    Thought.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true })
       .then((thoughtData) => {
         if (!thoughtData) {
           res.status(404).json({ message: "No thought found with this ID!" });
@@ -94,27 +94,15 @@ const thoughtController = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // remove thought
+  //remove a thought
   removeThought({ params }, res) {
-    // findOneAndDelete deletes the document while also returning its data like findOneAndUpdate
     Thought.findOneAndDelete({ _id: params.thoughtId })
-      .then((deletedThought) => {
-        if (!deletedThought) {
+      .then((thoughtData) => {
+        if (!thoughtData) {
           res.status(404).json({ message: "No thought found with this ID!" });
           return;
         }
-        return User.findOneAndUpdate(
-          { _id: params.userId },
-          { $pull: { thoughts: params.thoughtId } },
-          { new: true }
-        );
-      })
-      .then((userData) => {
-        if (!userData) {
-          res.status(404).json({ message: "No user found with this ID!" });
-          return;
-        }
-        res.status(200).json(userData);
+        res.status(200).json(thoughtData);
       })
       .catch((err) => res.status(500).json(err));
   },
