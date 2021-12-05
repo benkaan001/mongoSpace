@@ -102,7 +102,7 @@ const thoughtController = {
           res.status(404).json({ message: "No thought found with this ID!" });
           return;
         }
-        res.status(200).json(thoughtData);
+        res.status(200).json({ message: "success!" });
       })
       .catch((err) => res.status(500).json(err));
   },

@@ -32,21 +32,28 @@ Use the following url to clone the repository:
 
 `git clone https://github.com/benkaan001/mongoSpace`
 
-`npm install` to install all the production and development dependencies highlighted in the `package.json` file.
+In the root directory run `npm install` to install all the dependencies highlighted in the `package.json` file.
 
 ## Usage
 
-In the root directory run `npm install` to install all the dependencies.
-
 Initate the server connection with: `npm start`.
 
-To disconnect from the server, press <command+C>
+To disconnect the server connection, press `command+C`
+
+## Tests
+
+![CRUD Operations - USER Model]()
+![CRUD Operations - THOUGHT Model]()
+![POST & DELETE - Reactions]()
+![POST & DELETE - Friends]()
+
+Watch the test demo video here ->
+[Screencastify Part1](https://watch.screencastify.com/v/52H47jATKLpcDFIEM5ee)
+[Screencastify Part2](https://watch.screencastify.com/v/jx8gWePbeMESuC9ApNCS)
 
 ## Contributing
 
 Contributions are welcome!
-
-## Tests
 
 ## Email
 

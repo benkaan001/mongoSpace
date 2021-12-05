@@ -29,6 +29,7 @@ const UserSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     // this prevents virtauls from creating a duplicate of _id as 'id'
     id: false,

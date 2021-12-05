@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 const userController = {
   // get all users
@@ -22,7 +22,7 @@ const userController = {
   // instead of accessing entire req, destructured params out of it.
   getUserById({ params }, res) {
     // User.findOne(params.id) is another way to write it
-    User.findOne({ _id: params.id })
+    User.findOne({ _id: params.userId })
       .populate({
         path: "thoughts",
         select: "-__v",
@@ -54,7 +54,10 @@ const userController = {
   updateUser({ params, body }, res) {
     // if we don't set the third new:true parameter, it will retun the original doc
     //not the updated one -->updateOne() and updateMany() update without returning
-    User.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    User.findOneAndUpdate({ _id: params.userId }, body, {
+      new: true,
+      runValidators: true,
+    })
       .then((userData) => {
         if (!userData) {
           res.status(404).json({ message: "No user found with this ID!" });
@@ -91,7 +94,7 @@ const userController = {
   removeFriend({ params }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
-      { $pull: { friends: { friendId: params.friendId } } },
+      { $pull: { friends: params.friendId } },
       { new: true }
     )
       .then((userData) => {
@@ -106,10 +109,17 @@ const userController = {
       .then((userData) => {
         if (!userData) {
           res.status(404).json({ message: "No user found with this ID!" });
-          return;
+          // delete associated thoughts
+          return Thought.deleteMany({
+            _id: { $in: userData.thoughts },
+          });
         }
-        res.status(200).json(userData);
       })
+      .then(() =>
+        res.status(200).json({
+          message: "succes!",
+        })
+      )
       .catch((err) => res.status(500).json(err));
   },
 };
