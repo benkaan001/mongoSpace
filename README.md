@@ -42,14 +42,14 @@ To disconnect the server connection, press `command+C`
 
 ## Tests
 
-![CRUD Operations - USER Model]()
-![CRUD Operations - THOUGHT Model]()
-![POST & DELETE - Reactions]()
-![POST & DELETE - Friends]()
+![CRUD Operations_USER Model](https://github.com/benkaan001/mongoSpace/blob/main/assets/CRUD%20Operations%20for%20USERS%20Model.gif)
+![CRUD Operations_THOUGHT Model](https://github.com/benkaan001/mongoSpace/blob/main/assets/CRUD%20Operations%20for%20the%20THOUGHT%20Model.gif)
+![POST & DELETE_Reactions](https://github.com/benkaan001/mongoSpace/blob/main/assets/POST-DELETE%20REACTIONS.gif)
+![POST & DELETE_Friends](https://github.com/benkaan001/mongoSpace/blob/main/assets/POST-DELETE%20FRIENDS.gif)
 
 Watch the test demo video here ->
-[Screencastify Part1](https://watch.screencastify.com/v/52H47jATKLpcDFIEM5ee)
-[Screencastify Part2](https://watch.screencastify.com/v/jx8gWePbeMESuC9ApNCS)
+[Part-1](https://watch.screencastify.com/v/52H47jATKLpcDFIEM5ee)
+[Part-2](https://watch.screencastify.com/v/jx8gWePbeMESuC9ApNCS)
 
 ## Contributing
 
