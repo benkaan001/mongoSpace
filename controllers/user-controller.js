@@ -73,7 +73,7 @@ const userController = {
     User.findOneAndUpdate(
       { _id: params.userId },
       { $push: { friends: params.friendId } },
-      { new: true }
+      { new: true, runValidators: true }
     )
       .populate({ path: "friends", select: "-__v" })
       .select("-__v")
@@ -95,7 +95,7 @@ const userController = {
     User.findOneAndUpdate(
       { _id: params.userId },
       { $pull: { friends: params.friendId } },
-      { new: true }
+      { new: true, runValidators: true }
     )
       .then((userData) => {
         res.status(200).json(userData);

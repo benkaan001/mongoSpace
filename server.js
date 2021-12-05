@@ -17,6 +17,6 @@ mongoose.connect(
 
 app.listen(PORT, () => {
   console.log(
-    `🌍🌍🌍🌍🌍🌍🌍🌍 ====> Server Connected on localhost:${PORT} 🌍🌍🌍🌍🌍🌍`
+    `🌍🌍🌍 ---> Server is connected on localhost:${PORT} --->🌍🌍🌍`
   );
 });
