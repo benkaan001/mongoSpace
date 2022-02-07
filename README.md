@@ -47,10 +47,6 @@ To disconnect the server connection, press `command+C`
 ![POST & DELETE_Reactions](https://github.com/benkaan001/mongoSpace/blob/main/assets/POST-DELETE%20REACTIONS.gif)
 ![POST & DELETE_Friends](https://github.com/benkaan001/mongoSpace/blob/main/assets/POST-DELETE%20FRIENDS.gif)
 
-Watch the test demo video here ->
-[Part-1](https://watch.screencastify.com/v/52H47jATKLpcDFIEM5ee)
-[Part-2](https://watch.screencastify.com/v/jx8gWePbeMESuC9ApNCS)
-
 ## Contributing
 
 Contributions are welcome!
